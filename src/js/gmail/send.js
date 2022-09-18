@@ -2,7 +2,9 @@ const {google} = require("googleapis");
 const path = require("path");
 const fs = require("fs");
 
-const keyfile = path.join(__dirname, 'gmail_credentials.json');
+require('dotenv').config({path: '../../../.env' })
+
+const keyfile = path.join(__dirname, '../../../googleapi-oauth-credentials.json');
 const keys = JSON.parse(fs.readFileSync(keyfile));
 const scopes = [
     'https://mail.google.com/',
@@ -18,9 +20,8 @@ const client = new google.auth.OAuth2(
     keys.web.redirect_uris[0]
 );
 
-
 client.setCredentials({
-    refresh_token: `1//03sRyJKiaMOBuCgYIARAAGAMSNwF-L9IrEht48neiJ0k2ejKWbtoytnT_7TKDUefczibyUwLSwXub_bDrDSP1nUlFKe2FoKzBd6M`
+    refresh_token: process.env.GOOGLEAPI_REFRESH_TOKEN
 });
 
 const gmail = google.gmail({version:'v1',auth:client});
@@ -30,8 +31,8 @@ const run = async ()=> {
         const subject = '🤘 Hello 🤘';
         const utf8Subject = `=?utf-8?B?${Buffer.from(subject).toString('base64')}?=`;
         const messageParts = [
-            'From: Justin Beckwith <jimmykaguru@gmail.com>',
-            'To: Justin Beckwith <jimmykaguru@gmail.com>',
+            `From: Justin Beckwith <${process.env.GMAIL_SENDER}>`,
+            `To: Justin Beckwith <${process.env.GMAIL_RECIPIENT}>`,
             'Content-Type: text/html; charset=utf-8',
             'MIME-Version: 1.0',
             `Subject: ${utf8Subject}`,
@@ -61,4 +62,4 @@ const run = async ()=> {
     }
 }
 
-run().then
+run().then()
