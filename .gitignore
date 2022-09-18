@@ -119,3 +119,4 @@ dist
 gmail_credentials.json
 credentials.json
 .idea
+/googleapi-oauth-credentials.json
