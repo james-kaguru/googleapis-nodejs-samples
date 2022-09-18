@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "start": "node app",
-    "dev": "node runner"
+    "start auth": "node src/js/auth/oauth2.js",
+    "start auth-ts": "ts-node src/ts/auth/oauth2.ts"
   },
   "author": "",
   "license": "ISC",
