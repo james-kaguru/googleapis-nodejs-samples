@@ -1,9 +1,6 @@
 import { google } from 'googleapis';
 import express from 'express';
 import opn from 'open';
-
-//The second field should point to the path of your credentials file
-//this reads the file ad stores to in keyfile variable as a json
 import * as dotenv from 'dotenv'
 dotenv.config()
 
