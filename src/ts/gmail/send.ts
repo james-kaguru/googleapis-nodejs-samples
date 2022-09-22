@@ -1,6 +1,4 @@
 import { google } from 'googleapis';
-import path from 'path';
-import fs from 'fs';
 import * as dotenv from 'dotenv'
 dotenv.config()
 

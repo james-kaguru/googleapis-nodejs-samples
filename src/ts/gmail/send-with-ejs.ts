@@ -1,8 +1,8 @@
 import { google } from 'googleapis';
 import path from 'path';
-import fs from 'fs';
-
-require('dotenv').config({path: '../../../.env' })
+import ejs from 'ejs'
+import * as dotenv from 'dotenv'
+dotenv.config()
 
 //Here we create a new outh2 client which will be used to identify the app
 const client = new google.auth.OAuth2(
@@ -18,10 +18,8 @@ client.setCredentials({
 const gmail = google.gmail({version:'v1',auth:client});
 
 const run = async ()=> {
-  let ejs = require('ejs');
   let users = ['geddy', 'neil', 'alex'];
 
-  const path = require('path')
   const filename = path.join(__dirname,'../../views/sample-mail.ejs')
 
   const data = await ejs.renderFile(filename, {users: users})
