@@ -1,12 +1,11 @@
 import { google } from 'googleapis';
 import * as dotenv from 'dotenv'
-dotenv.config()
+dotenv.config({path: '../../../.env' })
 
 //Here we create a new outh2 client which will be used to identify the app
 const client = new google.auth.OAuth2(
   process.env.GOOGLEAPI_CLIENT_ID,
   process.env.GOOGLEAPI_SECRET,
-  process.env.GOOGLEAPI_REDIRECT_URL
 )
 
 client.setCredentials({

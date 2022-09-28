@@ -2,7 +2,7 @@ import { google } from 'googleapis';
 import path from 'path';
 import ejs from 'ejs'
 import * as dotenv from 'dotenv'
-dotenv.config()
+dotenv.config({path: '../../../.env' })
 
 //Here we create a new outh2 client which will be used to identify the app
 const client = new google.auth.OAuth2(
@@ -20,9 +20,9 @@ const gmail = google.gmail({version:'v1',auth:client});
 const run = async ()=> {
   let users = ['geddy', 'neil', 'alex'];
 
-  const filename = path.join(__dirname,'../../views/sample-mail.ejs')
+  const filename = path.join(__dirname,'../../views/welcome.ejs')
 
-  const data = await ejs.renderFile(filename, {users: users})
+  const data = await ejs.renderFile(filename, {users: users, message: "hello dad", code: 123})
   console.log(data)
 
 
@@ -49,7 +49,7 @@ const run = async ()=> {
       .replace(/=+$/, '');
 
     const res = await gmail.users.messages.send({
-      userId: 'me',
+      userId: 'dev@freshlybrewed.africa',
       requestBody: {
         raw: encodedMessage,
       },
