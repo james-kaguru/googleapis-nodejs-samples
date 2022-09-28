@@ -1,24 +1,15 @@
 import { google } from 'googleapis';
 import path from 'path';
-import fs from 'fs';
+import ejs from 'ejs'
+import * as dotenv from 'dotenv'
+dotenv.config({path: '../../../.env' })
 
-require('dotenv').config({path: '../../../.env' })
-
-const keyfile = path.join(__dirname, '../../../googleapi-oauth-credentials.json');
-const keys = JSON.parse(fs.readFileSync(keyfile).toString());
-const scopes = [
-  'https://mail.google.com/',
-  'https://www.googleapis.com/auth/gmail.modify',
-  'https://www.googleapis.com/auth/gmail.compose',
-  'https://www.googleapis.com/auth/gmail.send'
-];
-
-
+//Here we create a new outh2 client which will be used to identify the app
 const client = new google.auth.OAuth2(
-  keys.web.client_id,
-  keys.web.client_secret,
-  keys.web.redirect_uris[0]
-);
+  process.env.GOOGLEAPI_CLIENT_ID,
+  process.env.GOOGLEAPI_SECRET,
+  process.env.GOOGLEAPI_REDIRECT_URL
+)
 
 client.setCredentials({
   refresh_token: process.env.GOOGLEAPI_REFRESH_TOKEN
@@ -27,13 +18,11 @@ client.setCredentials({
 const gmail = google.gmail({version:'v1',auth:client});
 
 const run = async ()=> {
-  let ejs = require('ejs');
   let users = ['geddy', 'neil', 'alex'];
 
-  const path = require('path')
-  const filename = path.join(__dirname,'../../views/sample-mail.ejs')
+  const filename = path.join(__dirname,'../../views/welcome.ejs')
 
-  const data = await ejs.renderFile(filename, {users: users})
+  const data = await ejs.renderFile(filename, {users: users, message: "hello dad", code: 123})
   console.log(data)
 
 
@@ -60,7 +49,7 @@ const run = async ()=> {
       .replace(/=+$/, '');
 
     const res = await gmail.users.messages.send({
-      userId: 'me',
+      userId: 'dev@freshlybrewed.africa',
       requestBody: {
         raw: encodedMessage,
       },

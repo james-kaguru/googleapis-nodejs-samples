@@ -1,24 +1,12 @@
 import { google } from 'googleapis';
-import path from 'path';
-import fs from 'fs';
-import * as dotenv from 'dotenv' // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
-dotenv.config()
+import * as dotenv from 'dotenv'
+dotenv.config({path: '../../../.env' })
 
-const keyfile = path.join(__dirname, '../../../googleapi-oauth-credentials.json');
-const keys = JSON.parse(fs.readFileSync(keyfile).toString());
-const scopes = [
-  'https://mail.google.com/',
-  'https://www.googleapis.com/auth/gmail.modify',
-  'https://www.googleapis.com/auth/gmail.compose',
-  'https://www.googleapis.com/auth/gmail.send'
-];
-
-
+//Here we create a new outh2 client which will be used to identify the app
 const client = new google.auth.OAuth2(
-  keys.web.client_id,
-  keys.web.client_secret,
-  keys.web.redirect_uris[0]
-);
+  process.env.GOOGLEAPI_CLIENT_ID,
+  process.env.GOOGLEAPI_SECRET,
+)
 
 client.setCredentials({
   refresh_token: process.env.GOOGLEAPI_REFRESH_TOKEN

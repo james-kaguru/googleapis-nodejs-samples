@@ -1,15 +1,8 @@
 import { google } from 'googleapis';
 import express from 'express';
 import opn from 'open';
-import path from 'path';
-import fs from 'fs';
-
-//The second field should point to the path of your credentials file
-//this reads the file ad stores to in keyfile variable as a json
-const keyfile = path.join(__dirname, '../../../googleapi-oauth-credentials.json');
-
-//The keyfile json is parsed into an object
-const keys = JSON.parse(fs.readFileSync(keyfile).toString());
+import * as dotenv from 'dotenv'
+dotenv.config()
 
 //Here the scopes of what the app will do is defined
 //The example below shows gmail scopes
@@ -22,9 +15,9 @@ const scopes = [
 
 //Here we create a new outh2 client which will be used to identify the app
 const client = new google.auth.OAuth2(
-  keys.web.client_id,
-  keys.web.client_secret,
-  keys.web.redirect_uris[0]
+  process.env.GOOGLEAPI_CLIENT_ID,
+  process.env.GOOGLEAPI_SECRET,
+  process.env.GOOGLEAPI_REDIRECT_URL
 );
 
 //this one sets the access type to offline meaning a refresh token can be generated when the client is offline
