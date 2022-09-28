@@ -1,11 +1,11 @@
-import { google } from 'googleapis';
+import { gmail, auth } from '@googleapis/gmail';
 import path from 'path';
 import ejs from 'ejs'
 import * as dotenv from 'dotenv'
 dotenv.config({path: '../../../.env' })
 
 //Here we create a new outh2 client which will be used to identify the app
-const client = new google.auth.OAuth2(
+const client = new auth.OAuth2(
   process.env.GOOGLEAPI_CLIENT_ID,
   process.env.GOOGLEAPI_SECRET,
   process.env.GOOGLEAPI_REDIRECT_URL
@@ -15,7 +15,7 @@ client.setCredentials({
   refresh_token: process.env.GOOGLEAPI_REFRESH_TOKEN
 });
 
-const gmail = google.gmail({version:'v1',auth:client});
+const gmailClient = gmail({version:'v1',auth:client});
 
 const run = async ()=> {
   let users = ['geddy', 'neil', 'alex'];
@@ -48,7 +48,7 @@ const run = async ()=> {
       .replace(/\//g, '_')
       .replace(/=+$/, '');
 
-    const res = await gmail.users.messages.send({
+    const res = await gmailClient.users.messages.send({
       userId: 'dev@freshlybrewed.africa',
       requestBody: {
         raw: encodedMessage,
