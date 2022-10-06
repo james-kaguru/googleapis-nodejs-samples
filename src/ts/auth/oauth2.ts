@@ -1,4 +1,5 @@
-import { google } from 'googleapis';
+import { gmail, auth } from '@googleapis/gmail';
+
 import express from 'express';
 import opn from 'open';
 import * as dotenv from 'dotenv'
@@ -14,7 +15,7 @@ const scopes = [
 ];
 
 //Here we create a new outh2 client which will be used to identify the app
-const client = new google.auth.OAuth2(
+const client = new auth.OAuth2(
   process.env.GOOGLEAPI_CLIENT_ID,
   process.env.GOOGLEAPI_SECRET,
   process.env.GOOGLEAPI_REDIRECT_URL
