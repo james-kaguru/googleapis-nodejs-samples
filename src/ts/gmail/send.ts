@@ -38,7 +38,7 @@ const run = async ()=> {
       .replace(/=+$/, '');
 
     const res = await gmailClient.users.messages.send({
-      userId: 'me',
+      userId: `${process.env.GMAIL_SENDER}`,
       requestBody: {
         raw: encodedMessage,
       },
