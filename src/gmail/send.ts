@@ -1,6 +1,6 @@
 import { gmail , auth} from '@googleapis/gmail';
 import * as dotenv from 'dotenv'
-dotenv.config({path: '../../../.env' })
+dotenv.config({path: '../../.env' })
 
 //Here we create a new outh2 client which will be used to identify the app
 const client = new auth.OAuth2(
