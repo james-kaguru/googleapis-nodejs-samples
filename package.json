@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "start auth": "node src/js/auth/oauth2.js",
-    "start auth-ts": "ts-node src/ts/auth/oauth2.ts"
+    "start auth-ts": "ts-node src/auth/oauth2.ts"
   },
   "author": "",
   "license": "ISC",
