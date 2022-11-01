@@ -21,7 +21,6 @@ import { importGoogleCredentials } from './import-google-credentials';
       scope: googleCredentials.scopes,
     });
 
-    //EXPRESS SETUP
     const app = express();
 
     //This is the call back that will be called once the user grants the app access to the specified scoped
@@ -37,7 +36,7 @@ import { importGoogleCredentials } from './import-google-credentials';
         //log the tokens
         console.log(tokens)
 
-        //send appropriate messsage to the screen
+        //send appropriate messages to the screen
         res.send('Authentication successful! Please return to the console.');
 
         //close the server
@@ -50,6 +49,7 @@ import { importGoogleCredentials } from './import-google-credentials';
       // open the browser to authorize url to start the workflow
       opn(authorizeUrl, {wait: false});
     });
+
   } catch (err) {
     console.log(err);
     // return;
