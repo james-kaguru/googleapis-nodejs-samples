@@ -4,7 +4,7 @@ import { GoogleCredentials } from '../common/classes/google-credentials';
 import { validate } from 'class-validator';
 
 export const importGoogleCredentials  =  async () => {
-  const jsonString = fs.readFileSync("googleapi-credentials.json");
+  const jsonString = fs.readFileSync("googleapi-oauth-credentials.json");
   const googleCredentialsObj = JSON.parse(jsonString.toString());
 
   const googleCredentials = plainToClass(GoogleCredentials, googleCredentialsObj)

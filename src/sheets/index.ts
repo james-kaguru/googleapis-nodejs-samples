@@ -1,30 +1,25 @@
-// /**
-//  * Create a google spreadsheet
-//  * @param {string} title Spreadsheets title
-//  * @return {string} Created spreadsheets ID
-//  */
-// async function create(title) {
-//   const {GoogleAuth} = require('google-auth-library');
-//   const {google} = require('googleapis');
-//
-//   const auth = new GoogleAuth({
-//     scopes: 'https://www.googleapis.com/auth/spreadsheets',
-//   });
-//
-//   const service = google.sheets({version: 'v4', auth});
-//   const resource = {
-//     properties: {
-//       title,
-//     },
-//   };
-//   try {
-//     const spreadsheet = await service.spreadsheets.create({
-//       resource,
-//       fields: 'spreadsheetId',
-//     });
-//     console.log(`Spreadsheet ID: ${spreadsheet.data.spreadsheetId}`);
-//     return spreadsheet.data.spreadsheetId;
-//   } catch (err) {
-//     throw err;
-//   }
-// }
+import { importGoogleCredentials } from '../auth/import-google-credentials';
+import { sheets, auth } from '@googleapis/sheets';
+
+(async () => {
+
+  try {
+    const googleCredentials = await importGoogleCredentials();
+
+    const client = new auth.OAuth2(
+      googleCredentials.clientId,
+      googleCredentials.clientSecret,
+    )
+
+    client.setCredentials({
+      refresh_token: googleCredentials.refreshToken
+    });
+
+    const sheetsClient = sheets({version:'v4',auth: client});
+    const res = await sheetsClient.spreadsheets.create({})
+    console.log(res.data)
+  } catch (e) {
+    console.log(e)
+  }
+
+})()
