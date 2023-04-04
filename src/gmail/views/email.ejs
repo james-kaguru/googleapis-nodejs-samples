@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <style>
+    #voting-link {
+      border-radius: 5px;
+      background-color: #3456ff;
+      border: none;
+      color: white;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+      padding: 15px 50px;
+    }
+    body{
+      padding: 20px;
+      font-family: 'Montserrat', sans-serif;
+    }
+    div{
+      padding: 20px;
+      margin-bottom: 15px;
+    }
+    footer {
+      border-radius: 5px;
+      padding: 20px;
+      background: #cbebff;
+    }
+  </style>
+  <title>Cast your vote | Voting Link></title>
+</head>
+<body>
+<div>
+  <b>Hello <%= name %>,</b>
+  <p>You are receiving this email because you are part of the <%= election %> election.</p>
+  <p>The election will start at <%= startAt %> and close at <%= endAt %>. Kindly ensure you vote within the specified
+    time.</p>
+  <p>Once the specified election time has reached click the link below to proceed to vote.</p>
+
+  <p>Happy voting!</p>
+  <a href="https://castyourvote.co.ke/voting/elections/1/voters/c52f9a06-b06f-4df5-8872-e5f09650c03b" id="voting-link">Vote</a>
+  <p><b>NB:</b> The election link will only be active during the specified time.</p>
+</div>
+<footer>
+  <h2>Castyourvote.co.ke</h2>
+  <p>Here for all your voting needs</p>
+  <p>Contact: agmsolutions@gmail.com | 0720756945</p>
+</footer>
+
+
+</body>
+</html>

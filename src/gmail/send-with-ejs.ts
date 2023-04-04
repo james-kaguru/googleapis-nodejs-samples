@@ -20,9 +20,9 @@ const gmailClient = gmail({version:'v1',auth:client});
 const run = async ()=> {
   let users = ['geddy', 'neil', 'alex'];
 
-  const filename = path.join(__dirname,'views/welcome.ejs')
+  const filename = path.join(__dirname,'views/email.ejs')
 
-  const data = await ejs.renderFile(filename, {users: users, message: "hello dad", code: 123})
+  const data = await ejs.renderFile(filename, {name: 'Samuel Nyangi', election: "Kiambu", startAt: Date.now(),endAt: Date.now()})
   console.log(data)
 
 
@@ -36,7 +36,6 @@ const run = async ()=> {
       'MIME-Version: 1.0',
       `Subject: ${utf8Subject}`,
       '',
-      'This is a message just to say hello.',
       `${data}`,
     ];
     const message = messageParts.join('\n');
