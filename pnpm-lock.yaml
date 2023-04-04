@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@googleapis/drive': ^4.0.0
   '@googleapis/gmail': ^0.3.4
   '@googleapis/sheets': ^4.0.0
   '@types/ejs': ^3.1.1
@@ -17,6 +18,7 @@ specifiers:
   typescript: ^4.7.4
 
 dependencies:
+  '@googleapis/drive': 4.0.0
   '@googleapis/gmail': 0.3.4
   '@googleapis/sheets': 4.0.0
   '@types/express': 4.17.14
@@ -41,6 +43,16 @@ packages:
     engines: {node: '>=12'}
     dependencies:
       '@jridgewell/trace-mapping': 0.3.9
+    dev: false
+
+  /@googleapis/drive/4.0.0:
+    resolution: {integrity: sha512-46J3zDxmKe0tSLNwv+cnoybtZjKu1/8kb3VjlGWY4n3ClHCvH5defvJ5uhiMkQC5ZxHSGUTJbyzyCY0bWChktg==}
+    engines: {node: '>=12.0.0'}
+    dependencies:
+      googleapis-common: 6.0.3
+    transitivePeerDependencies:
+      - encoding
+      - supports-color
     dev: false
 
   /@googleapis/gmail/0.3.4:

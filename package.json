@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@googleapis/drive": "^4.0.0",
     "@googleapis/gmail": "^0.3.4",
     "@googleapis/sheets": "^4.0.0",
     "@types/express": "^4.17.13",
