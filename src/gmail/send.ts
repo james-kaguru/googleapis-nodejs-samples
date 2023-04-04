@@ -1,14 +1,11 @@
-import { gmail, auth } from '@googleapis/gmail';
-import path from 'path';
-import ejs from 'ejs'
+import { gmail , auth} from '@googleapis/gmail';
 import * as dotenv from 'dotenv'
-dotenv.config({path: '../../../.env' })
+dotenv.config({path: '../../.env' })
 
 //Here we create a new outh2 client which will be used to identify the app
 const client = new auth.OAuth2(
   process.env.GOOGLEAPI_CLIENT_ID,
   process.env.GOOGLEAPI_SECRET,
-  process.env.GOOGLEAPI_REDIRECT_URL
 )
 
 client.setCredentials({
@@ -18,14 +15,6 @@ client.setCredentials({
 const gmailClient = gmail({version:'v1',auth:client});
 
 const run = async ()=> {
-  let users = ['geddy', 'neil', 'alex'];
-
-  const filename = path.join(__dirname,'../../views/welcome.ejs')
-
-  const data = await ejs.renderFile(filename, {users: users, message: "hello dad", code: 123})
-  console.log(data)
-
-
   try {
     const subject = '🤘 Hello 🤘';
     const utf8Subject = `=?utf-8?B?${Buffer.from(subject).toString('base64')}?=`;
@@ -37,7 +26,7 @@ const run = async ()=> {
       `Subject: ${utf8Subject}`,
       '',
       'This is a message just to say hello.',
-      `${data}`,
+      'So... <b>Hello!</b>  🤘❤️😎',
     ];
     const message = messageParts.join('\n');
 
@@ -62,6 +51,3 @@ const run = async ()=> {
 }
 
 run().then()
-
-
-
